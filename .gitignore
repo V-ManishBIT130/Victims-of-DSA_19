@@ -1,0 +1,94 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.pyc
+venv/
+env/
+ENV/
+
+# Java
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+target/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# C++
+*.exe
+*.out
+*.o
+*.obj
+*.so
+*.dylib
+*.a
+*.dll
+*.app
+*.dSYM/
+*.su
+*.i*86
+*.x86_64
+
+# JavaScript/Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.env
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+*.bak
+
+# Temp files
+*.tmp
+*.temp
+/tmp/
+.cache/
+
+# Test coverage
+coverage/
+*.cover
+.coverage
+htmlcov/
+
+# Logs
+logs/
+*.log
