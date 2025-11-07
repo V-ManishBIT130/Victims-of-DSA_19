@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detector - Visual Preview</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .inbox {
+            padding: 0;
+        }
+        
+        .email-row {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .email-row:hover {
+            background: #f9f9f9;
+        }
+        
+        .email-row.phishing-high {
+            background: #fff5f5;
+            border-left: 3px solid #dc3545;
+        }
+        
+        .email-row.phishing-low {
+            background: #fffef5;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-right: 16px;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .dot.red {
+            background: #dc3545;
+            animation: pulse-red 2s infinite;
+        }
+        
+        .dot.yellow {
+            background: #ffc107;
+        }
+        
+        .dot.green {
+            background: #28a745;
+        }
+        
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 2px 20px rgba(220, 53, 69, 0.8); }
+        }
+        
+        .email-info {
+            flex: 1;
+        }
+        
+        .sender {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .subject {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .threat-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .threat-badge.high {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .threat-badge.low {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .threat-badge.safe {
+            background: #28a745;
+            color: white;
+        }
+        
+        .legend {
+            padding: 24px;
+            background: #f9f9f9;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .legend h3 {
+            margin: 0 0 16px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .legend-items {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .legend-text {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .stats {
+            padding: 20px 24px;
+            background: #f0f7ff;
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-number.red { color: #dc3545; }
+        .stat-number.yellow { color: #ffc107; }
+        .stat-number.green { color: #28a745; }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Phishing Email Detector</h1>
+            <p>Visual Indicator System - Preview</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number red">5</div>
+                <div class="stat-label">Phishing</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number yellow">1</div>
+                <div class="stat-label">Suspicious</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number green">7</div>
+                <div class="stat-label">Safe</div>
+            </div>
+        </div>
+        
+        <div class="inbox">
+            <!-- HIGH THREAT EMAILS - RED DOTS -->
+            <div class="email-row phishing-high">
+                <div class="dot red"></div>
+                <div class="email-info">
+                    <div class="sender">vm.manish502@gmail.com</div>
+                    <div class="subject">Fwd: hello</div>
+                </div>
+                <span class="threat-badge high">HIGH</span>
+            </div>
+            
+            <div class="email-row phishing-high">
+                <div class="dot red"></div>
+                <div class="email-info">
+                    <div class="sender">vm.manish502@gmail.com</div>
+                    <div class="subject">hello</div>
+                </div>
+                <span class="threat-badge high">HIGH</span>
+            </div>
+            
+            <div class="email-row phishing-high">
+                <div class="dot red"></div>
+                <div class="email-info">
+                    <div class="sender">hrlithesh05@gmail.com</div>
+                    <div class="subject">testingg</div>
+                </div>
+                <span class="threat-badge high">HIGH</span>
+            </div>
+            
+            <div class="email-row phishing-high">
+                <div class="dot red"></div>
+                <div class="email-info">
+                    <div class="sender">dhanushvmodiliay@gmail.com</div>
+                    <div class="subject">hello lithesh</div>
+                </div>
+                <span class="threat-badge high">HIGH</span>
+            </div>
+            
+            <!-- LOW THREAT EMAILS - YELLOW DOTS -->
+            <div class="email-row phishing-low">
+                <div class="dot yellow"></div>
+                <div class="email-info">
+                    <div class="sender">vm.manish502@gmail.com</div>
+                    <div class="subject">As it was - subject</div>
+                </div>
+                <span class="threat-badge low">LOW</span>
+            </div>
+            
+            <!-- SAFE EMAILS - GREEN DOTS -->
+            <div class="email-row">
+                <div class="dot green"></div>
+                <div class="email-info">
+                    <div class="sender">info@mail.uipath.com</div>
+                    <div class="subject">You're in! What's next for your UiPath journey?</div>
+                </div>
+                <span class="threat-badge safe">SAFE</span>
+            </div>
+            
+            <div class="email-row">
+                <div class="dot green"></div>
+                <div class="email-info">
+                    <div class="sender">dhanushvmodiliay@gmail.com</div>
+                    <div class="subject">(No Subject)</div>
+                </div>
+                <span class="threat-badge safe">SAFE</span>
+            </div>
+            
+            <div class="email-row">
+                <div class="dot green"></div>
+                <div class="email-info">
+                    <div class="sender">vm.manish502@gmail.com</div>
+                    <div class="subject">subject with a url</div>
+                </div>
+                <span class="threat-badge safe">SAFE</span>
+            </div>
+            
+            <div class="email-row">
+                <div class="dot green"></div>
+                <div class="email-info">
+                    <div class="sender">vm.manish502@gmail.com</div>
+                    <div class="subject">subect subject seubjestksjdf</div>
+                </div>
+                <span class="threat-badge safe">SAFE</span>
+            </div>
+            
+            <div class="email-row">
+                <div class="dot green"></div>
+                <div class="email-info">
+                    <div class="sender">phishingdemo65@gmail.com</div>
+                    <div class="subject">Fwd:</div>
+                </div>
+                <span class="threat-badge safe">SAFE</span>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>Color Legend:</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #dc3545;"></div>
+                    <span class="legend-text"><strong>RED</strong> - Critical/High threat (Delete immediately)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #ffc107;"></div>
+                    <span class="legend-text"><strong>YELLOW</strong> - Medium/Low threat (Review carefully)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #28a745;"></div>
+                    <span class="legend-text"><strong>GREEN</strong> - Safe/Legitimate (Proceed normally)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

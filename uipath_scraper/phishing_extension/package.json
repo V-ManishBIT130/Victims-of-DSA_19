@@ -1,0 +1,27 @@
+{
+  "name": "phishing-detector-api",
+  "version": "1.0.0",
+  "description": "API server for Phishing Detector Chrome Extension - Serves email data from UiPath workflow",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "phishing",
+    "detection",
+    "email",
+    "security",
+    "uipath",
+    "chrome-extension"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "email_id": "example_001",
+    "sender": "security@paypal-verify.com",
+    "sender_full": "PayPal Security <security@paypal-verify.com>",
+    "sender_domain": "paypal-verify.com",
+    "subject": "URGENT: Verify Your Account Now",
+    "body_preview": "Dear Customer, Your account has been suspended...",
+    "body_full": "Dear Customer, Your account has been suspended due to suspicious activity. Click here immediately to verify: http://192.168.1.1/verify?user=123. Failure to verify within 24 hours will result in permanent account closure.",
+    "date_received": "2025-11-07 12:00:00",
+    "urls_found": ["http://192.168.1.1/verify?user=123"],
+    "url_count": 1,
+    "extracted_at": "2025-11-07 12:00:05",
+    "has_urls": true
+  },
+  {
+    "email_id": "example_002",
+    "sender": "sarah.johnson@company.com",
+    "sender_full": "Sarah Johnson <sarah.johnson@company.com>",
+    "sender_domain": "company.com",
+    "subject": "Team Meeting Tomorrow",
+    "body_preview": "Hi Team, Just a reminder about our meeting...",
+    "body_full": "Hi Team, Just a reminder about our weekly meeting tomorrow at 10 AM in Conference Room B. Please bring your status updates. Thanks!",
+    "date_received": "2025-11-07 12:05:00",
+    "urls_found": [],
+    "url_count": 0,
+    "extracted_at": "2025-11-07 12:05:05",
+    "has_urls": false
+  }
+]

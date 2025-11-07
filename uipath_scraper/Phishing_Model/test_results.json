@@ -1,0 +1,203 @@
+{
+  "batch_summary": {
+    "total_emails": 2,
+    "analyzed_successfully": 2,
+    "failed": 0,
+    "phishing_detected": 1,
+    "legitimate": 1,
+    "phishing_percentage": 50.0,
+    "threat_distribution": {
+      "CRITICAL": 1,
+      "HIGH": 0,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "SAFE": 1
+    }
+  },
+  "results": [
+    {
+      "email_id": "example_001",
+      "sender": "security@paypal-verify.com",
+      "sender_domain": "paypal-verify.com",
+      "subject": "URGENT: Verify Your Account Now",
+      "date_received": "2025-11-07 12:00:00",
+      "prediction": {
+        "is_phishing": true,
+        "confidence": 1.0,
+        "confidence_percentage": 100.0,
+        "threat_level": "CRITICAL",
+        "verdict": "PHISHING",
+        "risk_score": 100
+      },
+      "url_analysis": {
+        "total_urls": 1,
+        "urls_found": [
+          {
+            "url": "http://192.168.1.1/verify?user=123",
+            "risk_level": "HIGH",
+            "risk_score": 45,
+            "risk_factors": [
+              "Contains IP address",
+              "Contains phishing keywords"
+            ]
+          }
+        ],
+        "has_suspicious_urls": true,
+        "url_features": {
+          "num_urls": 1,
+          "num_unique_domains": 1,
+          "has_ip_address": true,
+          "has_phishing_keywords": true,
+          "avg_url_length": 35.0
+        }
+      },
+      "content_analysis": {
+        "text_features": {
+          "subject_length": 31,
+          "body_length": 220,
+          "uppercase_ratio": 0.0595,
+          "digit_count": 13,
+          "exclamation_count": 0,
+          "question_count": 1,
+          "has_money_symbols": false,
+          "has_phishing_keywords": true
+        },
+        "sender_features": {
+          "sender_length": 26,
+          "sender_has_numbers": false,
+          "domain_mismatch": true
+        }
+      },
+      "security_indicators": {
+        "red_flags": [
+          {
+            "category": "URL",
+            "severity": "CRITICAL",
+            "flag": "IP address in URL",
+            "description": "URLs with IP addresses are highly suspicious"
+          },
+          {
+            "category": "URL",
+            "severity": "HIGH",
+            "flag": "Phishing keywords in URL",
+            "description": "URL contains common phishing terms"
+          },
+          {
+            "category": "SENDER",
+            "severity": "HIGH",
+            "flag": "Domain mismatch",
+            "description": "Sender domain does not match URLs in email"
+          },
+          {
+            "category": "CONTENT",
+            "severity": "HIGH",
+            "flag": "Phishing keywords detected",
+            "description": "Contains common phishing terminology"
+          },
+          {
+            "category": "URL",
+            "severity": "HIGH",
+            "flag": "Dangerous URL detected",
+            "description": "http://192.168.1.1/verify?user=123... - Contains IP address, Contains phishing keywords"
+          }
+        ],
+        "red_flag_count": 5
+      },
+      "recommendations": [
+        {
+          "priority": "CRITICAL",
+          "action": "DELETE IMMEDIATELY",
+          "description": "This email contains dangerous elements. Do not interact with it."
+        },
+        {
+          "priority": "CRITICAL",
+          "action": "DO NOT CLICK ANY LINKS",
+          "description": "Links in this email may lead to malware or credential theft"
+        },
+        {
+          "priority": "HIGH",
+          "action": "Report as phishing/spam",
+          "description": "Help improve email security by reporting this email"
+        },
+        {
+          "priority": "MEDIUM",
+          "action": "Block sender",
+          "description": "Prevent future emails from this sender"
+        }
+      ],
+      "analysis_metadata": {
+        "analyzed_at": "2025-11-07T01:40:56.209783",
+        "model_type": "LSTM (PyTorch)",
+        "device": "cuda"
+      }
+    },
+    {
+      "email_id": "example_002",
+      "sender": "sarah.johnson@company.com",
+      "sender_domain": "company.com",
+      "subject": "Team Meeting Tomorrow",
+      "date_received": "2025-11-07 12:05:00",
+      "prediction": {
+        "is_phishing": false,
+        "confidence": 0.0,
+        "confidence_percentage": 0.0,
+        "threat_level": "SAFE",
+        "verdict": "LEGITIMATE",
+        "risk_score": 0
+      },
+      "url_analysis": {
+        "total_urls": 0,
+        "urls_found": [],
+        "has_suspicious_urls": false,
+        "url_features": {
+          "num_urls": 0,
+          "num_unique_domains": 0,
+          "has_ip_address": false,
+          "has_phishing_keywords": false,
+          "avg_url_length": 0
+        }
+      },
+      "content_analysis": {
+        "text_features": {
+          "subject_length": 21,
+          "body_length": 131,
+          "uppercase_ratio": 0.085,
+          "digit_count": 2,
+          "exclamation_count": 1,
+          "question_count": 0,
+          "has_money_symbols": false,
+          "has_phishing_keywords": true
+        },
+        "sender_features": {
+          "sender_length": 25,
+          "sender_has_numbers": false,
+          "domain_mismatch": false
+        }
+      },
+      "security_indicators": {
+        "red_flags": [
+          {
+            "category": "CONTENT",
+            "severity": "HIGH",
+            "flag": "Phishing keywords detected",
+            "description": "Contains common phishing terminology"
+          }
+        ],
+        "red_flag_count": 1
+      },
+      "recommendations": [
+        {
+          "priority": "INFO",
+          "action": "Email appears legitimate",
+          "description": "No immediate action required, but always verify sender before clicking links"
+        }
+      ],
+      "analysis_metadata": {
+        "analyzed_at": "2025-11-07T01:40:56.211786",
+        "model_type": "LSTM (PyTorch)",
+        "device": "cuda"
+      }
+    }
+  ],
+  "analyzed_at": "2025-11-07T01:40:56.211786"
+}

@@ -1,0 +1,549 @@
+/* Phishing Detector - Threat Circle Indicator (COPIED FROM INSPIRATION) */
+
+/* Main Circle Container */
+.phishing-threat-circle {
+  position: absolute !important;
+  left: 210px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: white !important;
+  border: 2px solid #dadce0 !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  z-index: 100 !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Inner Dot */
+.circle-inner-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  display: block !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Circle Colors Based on Threat Level */
+.phishing-threat-circle.danger {
+  border-color: #ea4335 !important; /* Google Red */
+}
+
+.phishing-threat-circle.danger .circle-inner-dot {
+  background: #ea4335 !important;
+}
+
+.phishing-threat-circle.warning {
+  border-color: #fbbc04 !important; /* Google Yellow */
+}
+
+.phishing-threat-circle.warning .circle-inner-dot {
+  background: #fbbc04 !important;
+}
+
+.phishing-threat-circle.safe {
+  border-color: #34a853 !important; /* Google Green */
+}
+
+.phishing-threat-circle.safe .circle-inner-dot {
+  background: #34a853 !important;
+}
+
+/* Unknown/Not Analyzed - White/Gray */
+.phishing-threat-circle.unknown {
+  border-color: #dadce0 !important; /* Light gray */
+  background: #f8f9fa !important; /* Very light gray */
+}
+
+.phishing-threat-circle.unknown .circle-inner-dot {
+  background: #dadce0 !important;
+}
+
+/* Hover Effects */
+.phishing-threat-circle:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-50%) scale(1.15) !important;
+}
+
+.phishing-threat-circle.danger:hover {
+  border-color: #d93025 !important;
+  box-shadow: 0 2px 12px rgba(234, 67, 53, 0.3) !important;
+}
+
+.phishing-threat-circle.warning:hover {
+  border-color: #f9ab00 !important;
+  box-shadow: 0 2px 12px rgba(251, 188, 4, 0.3) !important;
+}
+
+.phishing-threat-circle.safe:hover {
+  border-color: #1e8e3e !important;
+  box-shadow: 0 2px 12px rgba(52, 168, 83, 0.3) !important;
+}
+
+/* Tooltip (COPIED AND ENHANCED FROM INSPIRATION) */
+.threat-tooltip {
+  position: absolute !important;
+  left: 35px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: white !important;
+  color: #333 !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  z-index: 999999 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease !important;
+  min-width: 300px !important;
+  border: 1px solid #dadce0 !important;
+}
+
+.phishing-threat-circle:hover .threat-tooltip {
+  opacity: 1 !important;
+}
+
+/* Tooltip Arrow */
+.threat-tooltip::before {
+  content: '' !important;
+  position: absolute !important;
+  left: -8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  border-right: 8px solid white !important;
+  border-top: 8px solid transparent !important;
+  border-bottom: 8px solid transparent !important;
+  filter: drop-shadow(-2px 0 2px rgba(0, 0, 0, 0.1)) !important;
+}
+
+/* Tooltip Header */
+.tooltip-header {
+  padding: 10px 14px !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  color: white !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.phishing-threat-circle.danger .tooltip-header {
+  background: #ea4335 !important;
+}
+
+.phishing-threat-circle.warning .tooltip-header {
+  background: #fbbc04 !important;
+  color: #333 !important;
+}
+
+.phishing-threat-circle.safe .tooltip-header {
+  background: #34a853 !important;
+}
+
+/* Tooltip Metrics */
+.tooltip-metrics {
+  padding: 12px 14px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.tooltip-metrics .metric {
+  font-size: 12px !important;
+  color: #5f6368 !important;
+  margin: 4px 0 !important;
+  line-height: 1.4 !important;
+}
+
+.tooltip-metrics .metric strong {
+  color: #202124 !important;
+  font-weight: 600 !important;
+}
+
+/* Tooltip Flags */
+.tooltip-flags {
+  padding: 10px 14px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  background: #fff9e6 !important;
+}
+
+.flag-item {
+  font-size: 11px !important;
+  color: #d93025 !important;
+  margin: 3px 0 !important;
+  font-weight: 500 !important;
+}
+
+/* Tooltip Recommendations */
+.tooltip-recommendations {
+  padding: 10px 14px !important;
+  background: #f8f9fa !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+.rec-item {
+  font-size: 11px !important;
+  color: #5f6368 !important;
+  margin: 3px 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Make email rows position relative so circle positions correctly */
+tr {
+  position: relative !important;
+}
+
+/* Flagged email indicator */
+.phishing-flagged-email {
+  position: relative !important;
+}
+
+/* Old Phishing Detector - Warning Badge Styles (Legacy - keeping for backwards compatibility) */
+
+.phishing-warning-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin-right: 10px;
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+  animation: pulse-warning 2s infinite;
+  cursor: pointer;
+  z-index: 1000;
+  position: relative;
+}
+
+.phishing-warning-badge:hover {
+  background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.6);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+.phishing-warning-badge .warning-icon {
+  font-size: 14px;
+  animation: shake 0.5s infinite;
+}
+
+.phishing-warning-badge .warning-text {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+}
+
+.phishing-warning-badge .url-count {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* Flagged email row highlighting */
+.phishing-flagged-email {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.phishing-flagged-email::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #dc3545;
+}
+
+/* Modal overlay */
+.phishing-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal content */
+.phishing-modal-content {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+/* Modal header */
+.modal-header {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  padding: 20px 24px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Modal body */
+.modal-body {
+  padding: 24px;
+}
+
+/* Alert danger box */
+.alert-danger {
+  background: #f8d7da;
+  border: 2px solid #dc3545;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  color: #721c24;
+}
+
+.alert-danger strong {
+  display: block;
+  font-size: 16px;
+}
+
+/* Email details section */
+.email-details {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.email-details h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #495057;
+}
+
+.email-details p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #212529;
+  word-break: break-all;
+}
+
+.email-details strong {
+  font-weight: 600;
+  color: #495057;
+}
+
+/* URLs section */
+.urls-section {
+  margin-bottom: 20px;
+}
+
+.urls-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.urls-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.urls-list li {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.urls-list code {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #d63384;
+  word-break: break-all;
+  flex: 1;
+}
+
+.url-warning {
+  background: #dc3545;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Warning message */
+.warning-message {
+  background: #e7f3ff;
+  border: 2px solid #0d6efd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.warning-message h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+.warning-message ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.warning-message li {
+  padding: 6px 0;
+  font-size: 14px;
+  color: #212529;
+}
+
+/* Modal actions */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modal-actions button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+}
+
+/* Animations */
+@keyframes pulse-warning {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+  }
+  50% {
+    box-shadow: 0 2px 16px rgba(220, 53, 69, 0.8);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar styling for modal */
+.phishing-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.phishing-modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.phishing-modal-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+.phishing-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
